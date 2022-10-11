@@ -22,3 +22,7 @@ function App() {
 }
 
 export default App
+
+
+// Routes used inplace of Switch
+// create route where one can change from A to B vice-versa
