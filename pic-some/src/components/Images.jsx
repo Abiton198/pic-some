@@ -1,7 +1,8 @@
 import React, {useState, useContext} from 'react'
 import { Context } from '../Context'
+// import PropTypes from "prop-types"
 
-export default function Images({className, img}) {
+  function Images({className, img}) {
     const [hovered, setHovered] = useState(false)
     const {toggleFavorite} = useContext(Context)
     const icon = <i className="ri-heart-fill favorite"></i>
@@ -27,6 +28,17 @@ export default function Images({className, img}) {
     </div>
   )
 }
+//PropTypes === when changes are to be made to the code, a warning is given to avoid code breaking
 
+// Images.propTypes = {
+//     className: PropTypes.string,
+//     img: PropTypes.shape({
+//         id: PropTypes.string.isRequired,
+//         url: PropTypes.string.isRequired,
+//         isFavorite: PropTypes.bool
+//     })
+// }
+  
+   export default Images
 //the image is being loaded from the url we get from the API
 //image container is the grid - styled container for our images 
