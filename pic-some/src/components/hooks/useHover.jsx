@@ -10,16 +10,18 @@ export default function useHover() {
     function leave(){
         setHovered(false)
     }
-    
-    useEffect(() => {
+
+    function eventList(){
         ref.current.addEventListener('mouseenter', enter)
         ref.current.addEventListener('mouseleave', leave)
-
-        return () => {
-
+    
+        return () => {   
         ref.current.removeEventListener('mouseenter', enter)
         ref.current.removeEventListener('mouseleave', leave)
-        }
+        }  
+    }
+    useEffect(() => {
+        eventList()
     }, [])
 
     return [hovered, ref]
