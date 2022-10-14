@@ -9,7 +9,6 @@ function Cart() {
     const totalCost = 5.99 * cartItems.length
     const totalCostDisplay = totalCost.toLocaleString('en-US', {style:'currency', currency:'USD'})
     const [buttonText, setButtonText] = useState("Place Order")
-    const [hovered, setHovered] = useState(false)
 
 //func to conditionally display text on button dependending on action done or happening
 function placeOrder(){
@@ -29,11 +28,9 @@ function placeOrder(){
             <p className="total-cost">Total: {totalCostDisplay}</p>
 
             {
-                cartItems.length ?
-                <div className="order-button"
-                onMouseEnter={()=>{setHovered(true)}}
-                onMouseLeave={()=>{setHovered(false)}}>
-                    <button onClick={()=>placeOrder()}>{buttonText}</button>
+                cartItems.length > 0 ?
+                <div className="order-button">
+                    <button onClick={placeOrder}>{buttonText}</button>
                 </div>
                 :
 

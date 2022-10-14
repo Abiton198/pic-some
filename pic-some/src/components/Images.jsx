@@ -1,9 +1,10 @@
-import React, {useState, useContext} from 'react'
+import React, { useContext } from 'react'
 import { Context } from '../Context'
+import useHover from './hooks/useHover'
 // import PropTypes from "prop-types"
 
   function Images({className, img}) {
-    const [hovered, setHovered] = useState(false)
+   const [hovered, ref] = useHover()
     const {toggleFavorite, addCartImage, cartItems,removeFromCart} = useContext(Context)
 
     //conditional rendering of icons upon hovering and clicking the images
@@ -32,8 +33,7 @@ import { Context } from '../Context'
 
   return (
     <div className={`${className} image-container`}
-    onMouseEnter={()=> setHovered(true)}
-    onmouseleave={()=>setHovered(false)}
+            ref={ref}
     >
         <img src={img.url} className="image-grid"/>
         {heartIcon()}
