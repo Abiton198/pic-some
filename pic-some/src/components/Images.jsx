@@ -4,18 +4,31 @@ import { Context } from '../Context'
 
   function Images({className, img}) {
     const [hovered, setHovered] = useState(false)
-    const {toggleFavorite} = useContext(Context)
-    const icon = <i className="ri-heart-fill favorite"></i>
+    const {toggleFavorite, addCartImage, cartItems,removeFromCart} = useContext(Context)
 
     //conditional rendering of icons upon hovering and clicking the images
     function heartIcon() {
-        if (img.Favorite){
-            return <i className="ri-heart-fill favorite" onClick={()=> toggleFavorite(img.id)}></i>
+        if (img.isFavorite){
+            return <i className="ri-heart-fill favorite" 
+                    onClick={()=> removeFromCart(img.id)}>
+                    </i>
         } else if(hovered){
-            return <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
+            return <i className="ri-heart-line favorite" 
+                    onClick={() => toggleFavorite(img.id)}>
+                    </i>
         }
     }
-    const cartIcon = hovered && <i className="ri-add-circle-line cart"></i>
+
+    //function to make image change to cart image and added to the cart
+    //some() === to indicate on selected items for cart
+    function cartIcon(){
+        const alreadyInCart = cartItems.some(item => item.id === img.id)
+        if(alreadyInCart){
+            return <i className="ri-shopping-cart-fill cart" onClick={()=>removeFromCart(img.id)}></i>
+        }else if(hovered){
+            return <i className="ri-add-circle-line cart" onClick={()=>addCartImage(img)}></i>
+        }
+    }
 
   return (
     <div className={`${className} image-container`}
@@ -24,7 +37,7 @@ import { Context } from '../Context'
     >
         <img src={img.url} className="image-grid"/>
         {heartIcon()}
-        {cartIcon}
+        {cartIcon()}
     </div>
   )
 }
